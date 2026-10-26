@@ -1,0 +1,112 @@
+@import "tailwindcss" source(none);
+@source "./routes";
+@source "./lib";
+/* Register used UI components (and their UI dependencies) here when adding them.
+   Scanning the whole library emits unused chart/sidebar/etc. styles. */
+@source "./components/ui/sheet.tsx";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-cream: var(--cream);
+    --color-tomato: var(--tomato);
+    --color-basil: var(--basil);
+    --color-basil-text: var(--basil-text);
+    --color-crust: var(--crust);
+    --color-ink: var(--ink);
+    --color-warm-brown: oklch(0.36 0.025 50);
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-script: "Dancing Script", cursive;
+    --font-body: "Inter", system-ui, sans-serif;
+}
+
+:root {
+    --radius: 0.5rem;
+    /* Brand palette inspired by Amore di Mamma logo: cream, tomato red, basil green */
+    --cream: oklch(0.972 0.018 85);
+    --tomato: oklch(0.555 0.21 28);
+    --basil: oklch(0.55 0.11 145);
+    --basil-text: oklch(0.46 0.1 145);
+    --crust: oklch(0.78 0.09 70);
+    --ink: oklch(0.22 0.02 50);
+
+    --background: var(--cream);
+    --foreground: var(--ink);
+    --card: oklch(0.99 0.012 85);
+    --card-foreground: var(--ink);
+    --popover: oklch(0.99 0.012 85);
+    --popover-foreground: var(--ink);
+    --primary: var(--tomato);
+    --primary-foreground: oklch(0.98 0.01 85);
+    --secondary: var(--basil);
+    --secondary-foreground: oklch(0.98 0.01 85);
+    --muted: oklch(0.93 0.02 80);
+    --muted-foreground: oklch(0.42 0.02 50);
+    --accent: var(--basil);
+    --accent-foreground: oklch(0.98 0.01 85);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.98 0.01 85);
+    --border: oklch(0.88 0.025 75);
+    --input: oklch(0.88 0.025 75);
+    --ring: var(--tomato);
+}
+
+@layer base {
+    * { border-color: var(--color-border); }
+    html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 7rem; }
+    #conteudo { scroll-margin-top: 7rem; }
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+    }
+    body {
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+        font-family: var(--font-body);
+        background-image:
+                radial-gradient(circle at 20% 10%, color-mix(in oklab, var(--tomato) 5%, transparent) 0%, transparent 40%),
+                radial-gradient(circle at 80% 90%, color-mix(in oklab, var(--basil) 6%, transparent) 0%, transparent 45%);
+    }
+    h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@utility font-script { font-family: var(--font-script); }
+@utility text-balance { text-wrap: balance; }
+
+@utility divider-leaf {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--basil-text);
+    &::before, &::after {
+        content: "";
+        width: 3rem;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.5;
+    }
+}
